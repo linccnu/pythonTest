@@ -1,0 +1,5 @@
+# environment and config of pycharm
+.idea
+
+# cache files
+__pycache__
