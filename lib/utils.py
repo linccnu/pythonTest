@@ -31,4 +31,7 @@ def get_file_list(file_dir):
     file_list = os.listdir(file_dir)
     file_list = [file for file in file_list if os.path.isfile(os.path.join(file_dir, file))]
 
+    # you can also use os.walk to recursively list all the files
+    # for root, dirs, file_list in os.walk(file_dir)
+
     return file_list
