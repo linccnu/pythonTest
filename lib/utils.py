@@ -35,3 +35,15 @@ def get_file_list(file_dir):
     # for root, dirs, file_list in os.walk(file_dir)
 
     return file_list
+
+def remove_the_slash_in_dir(dir):
+    """
+    Note: remove the last slash in directory.
+    :param dir: the absolute directory
+    :return: directory without slash in the end
+    """
+
+    if dir.endswith('/'):
+        return dir[:-1]
+    else:
+        return dir

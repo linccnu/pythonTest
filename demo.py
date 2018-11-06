@@ -34,5 +34,12 @@ def main():
         # print('file:%-20s size:%-5d byte' % (file, os.path.getsize(file_path)))       # file size is byte
         print('file:{:<20s} size:{:<5d} byte'.format(file, os.path.getsize(file_path)))
 
+
+    # ROOT_DIR = '/home/zhonglin/workspace/github/pythonTest'
+    # ROOT_DIR = '/home/zhonglin/workspace/github/pythonTest/'
+    ROOT_DIR = ''
+    new_dir = utils.remove_the_slash_in_dir(ROOT_DIR)
+    print('new_dir:{}'.format(new_dir))
+
 if __name__ == '__main__':
     main()
