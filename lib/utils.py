@@ -5,6 +5,7 @@ Note: This file is the utils script, contain some tiny but useful function.
 
 import os
 import sys
+import shutil
 
 
 def check_py_version(lowest_requred_version = (3, 4)):
@@ -47,3 +48,40 @@ def remove_the_slash_in_dir(dir):
         return dir[:-1]
     else:
         return dir
+
+def check_dir(dir):
+    """
+    Note: check the path/directory, if not exist, create a new one.
+    :param dir: the directory you want to check
+    :return: none
+    """
+
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+
+def check_file(file_path):
+    """
+    Note: check the specific path is a file, not a directory.
+    :param file_path: file path
+    :return: True or False
+    """
+
+    if os.path.isfile(file_path):
+        return True
+    else:
+        return False
+
+# file extension name
+extension_filename = ['txt', 'jpg', 'json', 'cpp', 'c', 'h', 'hpp', 'py']
+def shutil_copy_file(source_file_path, dest_file_path):
+    """
+    Note: copy source file to dest
+    :param source_file_path: file source path, not directory
+    :param dest_file_path: file destination path,can be derectory or not
+    :return: None
+    """
+
+    if os.path.isfile(source_file_path):
+        shutil.copy(source_file_path, dest_file_path)
+    else:
+        raise RuntimeError("source file {} is not exist.".format(source_file_path))

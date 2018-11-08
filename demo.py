@@ -36,10 +36,19 @@ def main():
 
 
     # ROOT_DIR = '/home/zhonglin/workspace/github/pythonTest'
-    # ROOT_DIR = '/home/zhonglin/workspace/github/pythonTest/'
-    ROOT_DIR = ''
+    ROOT_DIR = '/home/zhonglin/workspace/github/pythonTest/'
+    # ROOT_DIR = ''
     new_dir = utils.remove_the_slash_in_dir(ROOT_DIR)
     print('new_dir:{}'.format(new_dir))
+
+
+    test_dir = "/home/zhonglin/python_test"
+    utils.check_dir(test_dir)
+
+    source_file_path = "/home/zhonglin/workspace/github/pythonTest/lib/utils.py"
+    dest_file_path = "/home/zhonglin/python_test"
+    utils.shutil_copy_file(source_file_path, dest_file_path)
+    print(os.listdir(dest_file_path))
 
 if __name__ == '__main__':
     main()
