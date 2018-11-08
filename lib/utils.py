@@ -76,12 +76,17 @@ extension_filename = ['txt', 'jpg', 'json', 'cpp', 'c', 'h', 'hpp', 'py']
 def shutil_copy_file(source_file_path, dest_file_path):
     """
     Note: copy source file to dest
-    :param source_file_path: file source path, not directory
-    :param dest_file_path: file destination path,can be derectory or not
+    :param source_file_path: file source path, can not be directory
+    :param dest_file_path: file destination path can be derectory or not.
     :return: None
     """
 
     if os.path.isfile(source_file_path):
-        shutil.copy(source_file_path, dest_file_path)
+        if os.path.isdir(dest_file_path):
+            print("dest is a directory.")
+            shutil.copy(source_file_path, dest_file_path)
+        elif os.path.isfile(dest_file_path):
+            print("dest is a file.")
+            shutil.copyfile(source_file_path, dest_file_path)
     else:
         raise RuntimeError("source file {} is not exist.".format(source_file_path))
