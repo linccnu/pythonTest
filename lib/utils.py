@@ -90,3 +90,66 @@ def shutil_copy_file(source_file_path, dest_file_path):
             shutil.copyfile(source_file_path, dest_file_path)
     else:
         raise RuntimeError("source file {} is not exist.".format(source_file_path))
+
+
+def contruct_xml_file(file_path = '/home/zhonglin/result.xml'):
+    """
+    Note: contruct xml file from scratch.
+    :param file_path: xml file path to be saved.
+    :return:None
+    """
+
+    from xml.etree.ElementTree import ElementTree
+    from xml.etree.ElementTree import Element
+    from xml.etree.ElementTree import SubElement
+    from xml.etree.ElementTree import tostring
+
+    root = Element('annotation')
+    folder_name = SubElement(root, 'folder')
+    folder_name.text = 'VOC2017'
+    file_name = SubElement(root, 'filename')
+    file_name.text = 'Sunshine'
+    size_name = SubElement(root, 'size')
+    width = SubElement(size_name, 'width')
+    width.text = '1920'
+    height = SubElement(size_name, 'height')
+    height.text = '1080'
+    depth = SubElement(size_name, 'depth')
+    depth.text = '3'
+    object = SubElement(root, 'object')
+    cls_name = SubElement(object, 'name')
+    cls_name.text = 'cat'
+
+    bnbox = SubElement(object, 'bnbox')
+    bnbox_xmin = SubElement(bnbox, 'xmin')
+    bnbox_xmin.text = '99'
+    bnbox_ymin = SubElement(bnbox, 'ymin')
+    bnbox_ymin.text = '358'
+    bnbox_xmax = SubElement(bnbox, 'xmax')
+    bnbox_xmax.text = '135'
+    bnbox_ymax = SubElement(bnbox, 'ymax')
+    bnbox_ymax.text = '375'
+
+    # convert to string and save it in pretty xml format.
+    xml = tostring(root, encoding="UTF-8", method="xml")
+    from xml.dom.minidom import parseString
+    dom = parseString(xml)
+
+    with open(file_path, 'w') as f:
+        f.write(dom.toprettyxml())
+    print(xml)
+
+    ## You can also use the following code to generate xml file.
+    # from lxml.etree import Element
+    # from lxml.etree import SubElement
+    # from lxml.etree import tostring
+    # root = Element('annotation')
+    # folder_name = SubElement(root, 'folder')
+    # folder_name.text = 'VOC2017'
+    # xml = tostring(root, encoding="UTF-8", method="xml", xml_declaration=True)
+    # from xml.dom.minidom import parseString
+    # dom = parseString(xml)
+    # print(type(dom))
+    # with open("result.xml", 'w') as f:
+    #     f.write(dom.toprettyxml())
+    # print(xml)

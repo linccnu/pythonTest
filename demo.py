@@ -53,5 +53,11 @@ def main():
     else:
         print(os.listdir(os.path.dirname(dest_file_path)))
 
+    # Note:os.path.dirname() usually combine with os.path.abspath(__file__) together when using
+    xml_file_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+    utils.check_dir(xml_file_dir)
+    xml_file_path = os.path.join(xml_file_dir, 'result.xml')
+    utils.contruct_xml_file(xml_file_path)
+
 if __name__ == '__main__':
     main()
