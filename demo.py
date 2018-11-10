@@ -59,5 +59,9 @@ def main():
     xml_file_path = os.path.join(xml_file_dir, 'result.xml')
     utils.contruct_xml_file(xml_file_path)
 
+    anno_result = utils.parse_xml_file(xml_file_path)
+    print(anno_result)
+
+
 if __name__ == '__main__':
     main()

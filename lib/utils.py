@@ -5,7 +5,6 @@ Note: This file is the utils script, contain some tiny but useful function.
 
 import os
 import sys
-import shutil
 
 
 def check_py_version(lowest_requred_version = (3, 4)):
@@ -80,6 +79,7 @@ def shutil_copy_file(source_file_path, dest_file_path):
     :param dest_file_path: file destination path can be derectory or not.
     :return: None
     """
+    import shutil
 
     if os.path.isfile(source_file_path):
         if os.path.isdir(dest_file_path):
@@ -95,11 +95,10 @@ def shutil_copy_file(source_file_path, dest_file_path):
 def contruct_xml_file(file_path = '/home/zhonglin/result.xml'):
     """
     Note: contruct xml file from scratch.
-    :param file_path: xml file path to be saved.
+    :param file_path: path of xml file to be saved.
     :return:None
     """
 
-    from xml.etree.ElementTree import ElementTree
     from xml.etree.ElementTree import Element
     from xml.etree.ElementTree import SubElement
     from xml.etree.ElementTree import tostring
@@ -117,8 +116,24 @@ def contruct_xml_file(file_path = '/home/zhonglin/result.xml'):
     depth = SubElement(size_name, 'depth')
     depth.text = '3'
     object = SubElement(root, 'object')
-    cls_name = SubElement(object, 'name')
+
+    cls_name = SubElement(object, 'cls_name')
     cls_name.text = 'cat'
+
+    bnbox = SubElement(object, 'bnbox')
+    bnbox_xmin = SubElement(bnbox, 'xmin')
+    bnbox_xmin.text = '99'
+    bnbox_ymin = SubElement(bnbox, 'ymin')
+    bnbox_ymin.text = '358'
+    bnbox_xmax = SubElement(bnbox, 'xmax')
+    bnbox_xmax.text = '135'
+    bnbox_ymax = SubElement(bnbox, 'ymax')
+    bnbox_ymax.text = '375'
+
+    # another object info
+    object = SubElement(root, 'object')
+    cls_name = SubElement(object, 'cls_name')
+    cls_name.text = 'pedestrian'
 
     bnbox = SubElement(object, 'bnbox')
     bnbox_xmin = SubElement(bnbox, 'xmin')
@@ -137,7 +152,7 @@ def contruct_xml_file(file_path = '/home/zhonglin/result.xml'):
 
     with open(file_path, 'w') as f:
         f.write(dom.toprettyxml())
-    print(xml)
+    # print(xml)
 
     ## You can also use the following code to generate xml file.
     # from lxml.etree import Element
@@ -153,3 +168,44 @@ def contruct_xml_file(file_path = '/home/zhonglin/result.xml'):
     # with open("result.xml", 'w') as f:
     #     f.write(dom.toprettyxml())
     # print(xml)
+
+
+def parse_xml_file(file_path):
+    """
+    Note: parse xml file info, and store them into a dict
+    :param file_path: xml file path
+    :return: dict. eg {'image_name':xxx, 'size':xxx}
+    """
+    from xml.etree import ElementTree as ET
+
+    result = dict()
+
+    root = ET.parse(file_path)
+    folder_name = root.find('folder').text
+    result['folder_name'] = folder_name
+    file_name = root.find('filename').text
+    result['file_name'] = file_name
+    size = root.find('size')
+    width = int(size.find('width').text)
+    height = int(size.find('height').text)
+    depth = int(size.find('depth').text)
+    result['size'] = [width, height, depth]
+
+    objects = root.findall('object')
+    result['object'] = []
+    for obj in objects:
+        obj_tmp = dict()
+
+        cls_name =obj.find('cls_name').text
+        obj_tmp['cls_name'] = cls_name
+
+        bnbox = obj.find('bnbox')
+        xmin = int(bnbox.find('xmin').text)
+        ymin = int(bnbox.find('ymin').text)
+        xmax = int(bnbox.find('xmax').text)
+        ymax = int(bnbox.find('ymax').text)
+        obj_tmp['bnbox'] = [xmin,ymin,xmax,ymax]
+        result['object'].append(obj_tmp)
+
+    # print(result)
+    return result
