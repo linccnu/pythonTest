@@ -33,6 +33,7 @@ def main():
         file_path = os.path.join(root_dir, file)
         # print('file:%-20s size:%-5d byte' % (file, os.path.getsize(file_path)))       # file size is byte
         print('file:{:<20s} size:{:<5d} byte'.format(file, os.path.getsize(file_path)))
+    print("[get_file_list] Test ok.")
 
 
     # ROOT_DIR = '/home/zhonglin/workspace/github/pythonTest'
@@ -40,6 +41,7 @@ def main():
     # ROOT_DIR = ''
     new_dir = utils.remove_the_slash_in_dir(ROOT_DIR)
     print('new_dir:{}'.format(new_dir))
+    print("[remove_the_slash_in_dir] Test ok.")
 
 
     test_dir = "/home/zhonglin/python_test"
@@ -52,15 +54,18 @@ def main():
         print(os.listdir(dest_file_path))
     else:
         print(os.listdir(os.path.dirname(dest_file_path)))
+    print("[shutil_copy_file] Test ok.")
 
     # Note:os.path.dirname() usually combine with os.path.abspath(__file__) together when using
     xml_file_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
     utils.check_dir(xml_file_dir)
     xml_file_path = os.path.join(xml_file_dir, 'result.xml')
     utils.contruct_xml_file(xml_file_path)
+    print("[contruct_xml_file] Test ok.")
 
     anno_result = utils.parse_xml_file(xml_file_path)
     print(anno_result)
+    print("[parse_xml_file] Test ok.")
 
 
 if __name__ == '__main__':
