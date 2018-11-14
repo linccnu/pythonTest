@@ -200,10 +200,14 @@ def parse_xml_file(file_path):
         obj_tmp['cls_name'] = cls_name
 
         bnbox = obj.find('bnbox')
-        xmin = int(bnbox.find('xmin').text)
-        ymin = int(bnbox.find('ymin').text)
-        xmax = int(bnbox.find('xmax').text)
-        ymax = int(bnbox.find('ymax').text)
+        # You can use the following code to replace
+        xmin, ymin, xmax, ymax = map(int, [xx.text for xx in bnbox])
+
+        # xmin = int(bnbox.find('xmin').text)
+        # ymin = int(bnbox.find('ymin').text)
+        # xmax = int(bnbox.find('xmax').text)
+        # ymax = int(bnbox.find('ymax').text)
+
         obj_tmp['bnbox'] = [xmin,ymin,xmax,ymax]
         result['object'].append(obj_tmp)
 
