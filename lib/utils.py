@@ -99,60 +99,61 @@ def contruct_xml_file(file_path = '/home/zhonglin/result.xml'):
     :return:None
     """
 
-    from xml.etree.ElementTree import Element
-    from xml.etree.ElementTree import SubElement
-    from xml.etree.ElementTree import tostring
+    from xml.etree import ElementTree as ET
 
-    root = Element('annotation')
-    folder_name = SubElement(root, 'folder')
+
+    root = ET.Element('annotation')
+    folder_name = ET.SubElement(root, 'folder')
     folder_name.text = 'VOC2017'
-    file_name = SubElement(root, 'filename')
+    file_name = ET.SubElement(root, 'filename')
     file_name.text = 'Sunshine'
-    size_name = SubElement(root, 'size')
-    width = SubElement(size_name, 'width')
+    size_name = ET.SubElement(root, 'size')
+    width = ET.SubElement(size_name, 'width')
     width.text = '1920'
-    height = SubElement(size_name, 'height')
+    height = ET.SubElement(size_name, 'height')
     height.text = '1080'
-    depth = SubElement(size_name, 'depth')
+    depth = ET.SubElement(size_name, 'depth')
     depth.text = '3'
-    object = SubElement(root, 'object')
+    object = ET.SubElement(root, 'object')
 
-    cls_name = SubElement(object, 'cls_name')
+    cls_name = ET.SubElement(object, 'cls_name')
     cls_name.text = 'cat'
 
-    bnbox = SubElement(object, 'bnbox')
-    bnbox_xmin = SubElement(bnbox, 'xmin')
+    bnbox = ET.SubElement(object, 'bnbox')
+    bnbox_xmin = ET.SubElement(bnbox, 'xmin')
     bnbox_xmin.text = '99'
-    bnbox_ymin = SubElement(bnbox, 'ymin')
+    bnbox_ymin = ET.SubElement(bnbox, 'ymin')
     bnbox_ymin.text = '358'
-    bnbox_xmax = SubElement(bnbox, 'xmax')
+    bnbox_xmax = ET.SubElement(bnbox, 'xmax')
     bnbox_xmax.text = '135'
-    bnbox_ymax = SubElement(bnbox, 'ymax')
+    bnbox_ymax = ET.SubElement(bnbox, 'ymax')
     bnbox_ymax.text = '375'
 
     # another object info
-    object = SubElement(root, 'object')
-    cls_name = SubElement(object, 'cls_name')
+    object = ET.SubElement(root, 'object')
+    cls_name = ET.SubElement(object, 'cls_name')
     cls_name.text = 'pedestrian'
 
-    bnbox = SubElement(object, 'bnbox')
-    bnbox_xmin = SubElement(bnbox, 'xmin')
+    bnbox = ET.SubElement(object, 'bnbox')
+    bnbox_xmin = ET.SubElement(bnbox, 'xmin')
     bnbox_xmin.text = '99'
-    bnbox_ymin = SubElement(bnbox, 'ymin')
+    bnbox_ymin = ET.SubElement(bnbox, 'ymin')
     bnbox_ymin.text = '358'
-    bnbox_xmax = SubElement(bnbox, 'xmax')
+    bnbox_xmax = ET.SubElement(bnbox, 'xmax')
     bnbox_xmax.text = '135'
-    bnbox_ymax = SubElement(bnbox, 'ymax')
+    bnbox_ymax = ET.SubElement(bnbox, 'ymax')
     bnbox_ymax.text = '375'
 
     # convert to string and save it in pretty xml format.
-    xml = tostring(root, encoding="UTF-8", method="xml")
-    from xml.dom.minidom import parseString
-    dom = parseString(xml)
+    xml = ET.tostring(root, encoding="UTF-8", method="xml")
+    from xml.dom import minidom
+    tree = minidom.parseString(xml)
+    xml_tree = tree.toprettyxml()
+    dom_string = '\n'.join(s for s in xml_tree.splitlines())
 
     with open(file_path, 'w') as f:
-        f.write(dom.toprettyxml())
-    # print(xml)
+        f.write(dom_string)
+    print(xml)
 
     ## You can also use the following code to generate xml file.
     # from lxml.etree import Element
