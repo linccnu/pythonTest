@@ -27,6 +27,22 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
         wget \
         git \
         vim \
+		libatlas-base-dev \
+		libboost-all-dev \
+		libgflags-dev \
+		libgoogle-glog-dev \
+		libhdf5-serial-dev \
+		libleveldb-dev \
+		liblmdb-dev \
+		libopencv-dev \
+		libprotobuf-dev \
+		libsnappy-dev \
+		protobuf-compiler \
+		python-dev \
+		python-numpy \
+		python-pip \
+		python-setuptools \
+		python-scipy \
         && \
 
 # ==================================================================
@@ -38,6 +54,11 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
     DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
         software-properties-common \
         && \
+
+# ==================================================================
+# Update gcc/g++ version to 5.x
+# If you do not want to update it, you can comment the following
+# ------------------------------------------------------------------
     add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
