@@ -1,5 +1,6 @@
 # environment and config of pycharm
 .idea
+.ipynb_checkpoints
 
 # cache files
 __pycache__
