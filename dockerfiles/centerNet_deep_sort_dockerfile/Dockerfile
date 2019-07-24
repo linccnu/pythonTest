@@ -9,7 +9,7 @@ COPY pip.conf     /root/.pip/pip.conf
 # ==================================================================
 # environment
 # ------------------------------------------------------------------
-RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
+RUN APT_INSTALL="apt-get install -y " && \
     PIP_INSTALL="python -m pip --no-cache-dir install --upgrade" && \
     GIT_CLONE="git clone --depth 10" && \
 
