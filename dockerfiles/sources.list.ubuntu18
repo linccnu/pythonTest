@@ -13,11 +13,11 @@
 #deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security universe
 
 ##mirrors of aliyun for ubuntu 18.04
-deb https://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
-deb https://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
-deb https://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
-deb https://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
-deb https://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+#deb https://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+#deb https://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+#deb https://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+#deb https://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+#deb https://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
 
 ## ubuntu16.04
 #deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted
@@ -30,6 +30,18 @@ deb https://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe
 #deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted
 #deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security universe
 #deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security multiverse
+
+## ubuntu18.04
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic universe
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates universe
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security universe
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security multiverse
 
 ##mirrors of tsinghua for ubuntu 16.04
 # 默认注释了源码镜像以提高apt update 速度，如有需要可自行取消注释
