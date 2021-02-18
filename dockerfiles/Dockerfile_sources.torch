@@ -1,0 +1,81 @@
+# ==================================================================
+# module list
+# ------------------------------------------------------------------
+# python        3.6    (apt)
+# tensorflow    latest (pip)
+# ==================================================================
+
+FROM ubuntu:16.04
+COPY sources.list /etc/apt/sources.list
+
+RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
+    PIP_INSTALL="python -m pip --no-cache-dir install --upgrade" && \
+    GIT_CLONE="git clone --depth 10" && \
+
+    rm -rf /var/lib/apt/lists/* \
+           /etc/apt/sources.list.d/cuda.list \
+           /etc/apt/sources.list.d/nvidia-ml.list && \
+
+    apt-get update && \
+
+# ==================================================================
+# tools
+# ------------------------------------------------------------------
+
+    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+        build-essential \
+        ca-certificates \
+        cmake \
+        wget \
+        git \
+        vim \
+		libatlas-base-dev \
+		libboost-all-dev \
+		libgflags-dev \
+		libgoogle-glog-dev \
+		libhdf5-serial-dev \
+		libleveldb-dev \
+		liblmdb-dev \
+		libopencv-dev \
+		libprotobuf-dev \
+		libsnappy-dev \
+		protobuf-compiler \
+		python-dev \
+		python-numpy \
+		python-pip \
+		python-setuptools \
+		python-scipy \
+        && \
+
+# ==================================================================
+# python
+# add-apt-repository ppa:deadsnakes/ppa && \
+# add-apt-repository ppa:fkrull/deadsnakes && \
+# ------------------------------------------------------------------
+
+    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
+        software-properties-common \
+        && \
+
+# ==================================================================
+# Update gcc/g++ version to 5.x
+# If you do not want to update it, you can comment the following
+# ------------------------------------------------------------------
+
+
+# ==================================================================
+# tensorflow
+# ------------------------------------------------------------------
+
+
+# ==================================================================
+# config & cleanup
+# ------------------------------------------------------------------
+
+    ldconfig && \
+    apt-get clean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* /tmp/* ~/*
+
+WORKDIR /workspace
+EXPOSE 8888
